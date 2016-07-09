@@ -19,7 +19,7 @@ class RoomHandler(object):
         """Add nick to room. Return generated clientID"""
         # meant to be called from the main handler (page where somebody indicates a nickname and a room to join)
         cid = uuid.uuid4().hex  # generate a client id.
-        if not room in self.room_info:  # it's a new room # if room not in self.room_info:
+        if room not in self.room_info:  # it's a new room # if room not in self.room_info:
             self.room_info[room] = []
         c = 1
         nn = nick
@@ -133,13 +133,16 @@ class MainHandler(tornado.web.RequestHandler):
 
     def get(self):
         """Render chat.html if required arguments are present, render main.html otherwise."""
+        avalaible_rooms = []
         try:
             room = self.get_argument("room")
             nick = self.get_argument("nick")
             cid = self.__rh.add_roomnick(room, nick)
             self.render("templates/chat.html", clientid=cid)
         except tornado.web.MissingArgumentError:
-            self.render("templates/main.html")
+            for room in self.__rh.room_info:
+                 avalaible_rooms += room
+            self.render("templates/main.html", rooms=self.__rh.room_info)
 
 class ClientWSConnection(websocket.WebSocketHandler):
 
@@ -175,7 +178,8 @@ if __name__ == "__main__":
     app = tornado.web.Application([
         (r"/", MainHandler, {'room_handler': rh}),
         (r"/ws/(.*)", ClientWSConnection, {'room_handler': rh})],
-        static_path=os.path.join(os.path.dirname(__file__), "static")
+        static_path=os.path.join(os.path.dirname(__file__), "static"),
+        template_path=os.path.join(os.path.dirname(__file__), "templates"),
         autoreload=True,
     )
     app.listen(8888)

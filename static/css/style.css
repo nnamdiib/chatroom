@@ -1,4 +1,8 @@
-
+.bg-2 { 
+    background-color: #333333; /* Dark grey */
+    color: #ffffff;
+    font-family: Century Gothic;
+}
 
 #chat {
     
@@ -23,6 +27,10 @@
 }
 
 
+#loginbox {
+	position: relative;
+	text-align: center;
+}
 
 #nickList {
     

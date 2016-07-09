@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ static_url("css/style.css") }}">
+    <title>mea</title>
+</head>
+<body class="container">
+
+    <div class="jumbotron bg-2 text-centre">
+        <h2> Clam Chat </h2>
+    </div>
+    
+    <form id="loginbox" class="form-horizontal" role="form">
+    		<div class="form-group">
+                    <label for="txtNickname" class="col-sm-2 control-label">Nickname</label>
+    				<div class="col-sm-10">
+    						<input id="txtNickname" class="form-control" type="text" name="Nickname" value="">
+    				</div>
+    		</div>
+    		<div class="form-group">
+                <label for="txtRoom" class="col-sm-2 control-label">Room</label>
+    			<div class="col-sm-10">
+    					<input id="txtRoom" type="text" class="form-control" name="Room" value="">
+    			</div>
+    		</div>
+    		<div class="form-group">
+    				<div class="col-sm-offset-2 col-sm-10">
+    						<input type="button" class="btn btn-primary" id="btnLogin" name="Send" disabled="disabled" value="Go!"></input>
+    				</div>
+    		</div>
+    </form>
+
+      <!--  <p>Room name: <input id="txtRoom" type="text" name="Room" value=""></p>
+	   <p>Your nickname: <input id="txtNickname" type="text" name="Nickname" value=""></p>
+	   <p><input id="btnLogin" type="button" name="Send" value="Start chat!" disabled="disabled"/></p>
+	</div>-->
+
+    <div id="available-rooms">
+            <ul>
+            		
+            	<li>{{ rooms }}</li>
+            		
+            </ul>
+
+
+    </div>
+
+    <script src="{{ static_url("js/zepto.min.js") }}"></script>
+
+    <script>
+        Zepto(function($){
+            $('#btnLogin').click(function() { login(); });
+
+            $("#txtRoom").keyup(function(event) { update_send(event); } );
+            $("#txtNickname").keyup(function(event) { update_send(event); } );
+           
+
+        });
+
+        function login(){
+                var h;
+                h = window.location.host  + '/chat.html/?room=' + $('#txtNickname').val() + '&nick=' + $('#txtNickname').val();
+                window.location = '/?room=' + $('#txtRoom').val() + '&nick=' + $('#txtNickname').val();
+            }
+
+        function update_send(event) {
+            if ( $("#txtRoom").val() != "" && $("#txtNickname").val() != "") {
+                $("#btnLogin").removeAttr("disabled");
+                if (event.which == 13){
+                    login();
+                }
+            } else {
+                $("#btnLogin").attr("disabled", "disabled");
+            }
+        };
+
+    </script>
+</body>
+</html>
