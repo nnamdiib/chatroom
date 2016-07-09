@@ -1,0 +1,14 @@
+
+
+- add message persistence
+
+- make attractive UI
+
+- limit usernames to 15 chars
+
+- show available chatrooms
+
+
+This can turn out to be a very nice project.
+
+
