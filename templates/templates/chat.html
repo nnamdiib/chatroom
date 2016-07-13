@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>nnamdi</title>
-     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{ static_url("css/style.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ static_url("css/bootstrap.css") }}">
+    <script src="{{ static_url("js/prefixfree.min.js") }}"></script>
+    <script src="{{ static_url("js/zepto.min.js") }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clam Chat</title>
 </head>
-<body>
+<body class="container ">
 
+        <div class="header">
+            <div>clam<span>Chat</span></div>
+        </div>
+        <br>
 	<div id="chat">
 		<div id="msgList" style=""></div>
 		Your message:<br/> <input id="txtMsg" type="text" name="msg" value="">

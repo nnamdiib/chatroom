@@ -144,6 +144,14 @@ class MainHandler(tornado.web.RequestHandler):
                  avalaible_rooms += room
             self.render("templates/main.html", rooms=self.__rh.room_info)
 
+class ExistingRooms(tornado.web.RequestHandler):
+	def initialize(self, room_handler):
+		self.__rh = room_handler
+	
+	def get(self):
+		rooms = self.__rh.room_info
+		self.render("lmao")
+
 class ClientWSConnection(websocket.WebSocketHandler):
 
     def initialize(self, room_handler):
@@ -167,7 +175,7 @@ class ClientWSConnection(websocket.WebSocketHandler):
         print "WebSocket closed"
         self.__rh.remove_client(self.__clientID)
 
-if __name__ == "__main__":
+def main():
     rh = RoomHandler()
     settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
@@ -177,13 +185,19 @@ if __name__ == "__main__":
     }
     app = tornado.web.Application([
         (r"/", MainHandler, {'room_handler': rh}),
-        (r"/ws/(.*)", ClientWSConnection, {'room_handler': rh})],
+		(r"/exising/(.*)", ExistingRooms, {'room_handler': rh}),
+        (r"/ws/(.*)", ClientWSConnection, {'room_handler': rh}),
+		],
         static_path=os.path.join(os.path.dirname(__file__), "static"),
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         autoreload=True,
+		debug=True,
     )
     app.listen(8888)
     print 'Simple Chat Server started.'
     print 'listening on 8888 ...'
     tornado.ioloop.IOLoop.instance().start()
+ 
+if __name__ == "__main__":
+	main()
 
