@@ -1,1 +1,38 @@
-sw
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ static_url("css/style.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ static_url("css/bootstrap.css") }}">
+    <script src="{{ static_url("js/prefixfree.min.js") }}"></script>
+    <script src="{{ static_url("js/zepto.min.js") }}"></script>
+	<script src="{{ static_url("js/exist.js") }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clam Chat</title>
+	
+</head>
+<body class="container ">
+	<div class="header">
+			<div>Clam<span>Chat</span></div>
+	</div>
+	<div class="login">
+		<input id="txtNickname" type="text" name="Nickname" value="" placeholder="Pick a username"><br>
+	</div>
+	<div id="available" >
+		<h4>Available Chatrooms</h4>
+		<br>
+		<form >
+			{% for room in rooms%}
+			<label style="display:block"><input type="radio" name="room" value="{{ room }}"> {{ room }} </label>
+			{% end %}
+			<br>
+			<input id="btnLogin" onclick="return(update_send())" type="button" name="Send" value="Start chat!"/>
+		</form>
+		
+		
+		
+	</div>
+
+
+
+</body>
+</html>

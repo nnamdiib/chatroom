@@ -150,7 +150,7 @@ class ExistingRooms(tornado.web.RequestHandler):
 	
 	def get(self):
 		rooms = self.__rh.room_info
-		self.render("lmao")
+		self.render("templates/existing.html", rooms=rooms)
 
 class ClientWSConnection(websocket.WebSocketHandler):
 
@@ -185,7 +185,7 @@ def main():
     }
     app = tornado.web.Application([
         (r"/", MainHandler, {'room_handler': rh}),
-		(r"/exising/(.*)", ExistingRooms, {'room_handler': rh}),
+		(r"/existing", ExistingRooms, {'room_handler': rh}),
         (r"/ws/(.*)", ClientWSConnection, {'room_handler': rh}),
 		],
         static_path=os.path.join(os.path.dirname(__file__), "static"),

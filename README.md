@@ -5,8 +5,13 @@ I will extend his idea by adding the following features:
 - Message persistence
 
 - Attractive UI
+	- Homepage (done)
+	- Existing chatroom page 
+	- Chat page
 
 - limit usernames to 15 chars
+
+- no spaces allowed in room names
 
 - Show available chatrooms
 

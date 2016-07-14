@@ -39,9 +39,20 @@
 #red-part {
 	color:#F13E41;
 }
-#available-rooms {
+#alternative {
 	position: absolute;
 	top: calc(70% - 75px);
+	left: calc(50% - 140px);
+	z-index: 2;
+	padding: 10px;
+	color: #333333;
+	font-family: 'Exo', sans-serif;
+	width: 250px;
+}
+
+#available {
+	position: absolute;
+	top: calc(60% - 75px);
 	left: calc(50% - 140px);
 	z-index: 2;
 	padding: 10px;
