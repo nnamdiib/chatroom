@@ -4,7 +4,7 @@
     
 	position: absolute;
 	top: calc(40% - 75px);
-	left: calc(50% - 150px);
+	left: calc(40% - 150px);
 	z-index: 2;
 	padding: 10px;
 	color: #333333;
@@ -32,7 +32,7 @@
 #nickList {
 	position: absolute;
 	top: calc(40% - 75px);
-	left: calc(50% - 140px);
+	right: calc(40% - 140px);
 	border: visible;
 
 }
@@ -52,7 +52,7 @@
 
 #available {
 	position: absolute;
-	top: calc(60% - 75px);
+	top: calc(40% - 75px);
 	left: calc(50% - 140px);
 	z-index: 2;
 	padding: 10px;

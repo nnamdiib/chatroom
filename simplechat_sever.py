@@ -6,6 +6,7 @@ import json
 import tornado.ioloop
 import tornado.web
 from tornado import websocket
+from tornado.web import url
 
 
 class RoomHandler(object):
@@ -142,7 +143,7 @@ class MainHandler(tornado.web.RequestHandler):
         except tornado.web.MissingArgumentError:
             for room in self.__rh.room_info:
                  avalaible_rooms += room
-            self.render("templates/main.html", rooms=self.__rh.room_info)
+            self.render("templates/main.html")
 
 class ExistingRooms(tornado.web.RequestHandler):
 	def initialize(self, room_handler):
@@ -184,9 +185,9 @@ def main():
     "xsrf_cookies": True,
     }
     app = tornado.web.Application([
-        (r"/", MainHandler, {'room_handler': rh}),
-		(r"/existing", ExistingRooms, {'room_handler': rh}),
-        (r"/ws/(.*)", ClientWSConnection, {'room_handler': rh}),
+        url(r"/", MainHandler, {'room_handler': rh}, name="index"),
+		url(r"/existing", ExistingRooms, {'room_handler': rh},  name="existing"),
+        url(r"/ws/(.*)", ClientWSConnection, {'room_handler': rh}),
 		],
         static_path=os.path.join(os.path.dirname(__file__), "static"),
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
