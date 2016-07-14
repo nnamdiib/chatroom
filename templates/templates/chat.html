@@ -19,7 +19,12 @@
 		Your message:<br/> <input id="txtMsg" type="text" name="msg" value="">
 		<input type="button" id="btnSend" value="Send" disabled="disabled"/>
 	</div>
-    <div id="nickList" style=""></div>
+	
+	<div id="nicknames">
+		<h5>People online in <span id="red-part">{{ this_room }}</span></h5>
+		<div id="nickList"></div>
+	</div>
+    
 
     <script src="{{ static_url("js/underscore-min.js") }}"></script>
     <script src="{{ static_url("js/zepto.min.js") }}"></script>

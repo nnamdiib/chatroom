@@ -28,12 +28,18 @@
 	overflow: auto;
 
 }
-
-#nickList {
+#nicknames {
 	position: absolute;
 	top: calc(40% - 75px);
-	right: calc(40% - 140px);
-	border: visible;
+	right: calc(20% - 140px);
+	color: #333333;
+	font-family: 'Exo', sans-serif;
+
+}
+
+#nickList {
+	
+	color: #333333;
 
 }
 #red-part {
@@ -52,7 +58,7 @@
 
 #available {
 	position: absolute;
-	top: calc(40% - 75px);
+	top: calc(60% - 75px);
 	left: calc(50% - 140px);
 	z-index: 2;
 	padding: 10px;
@@ -60,6 +66,8 @@
 	font-family: 'Exo', sans-serif;
 	width: 250px;
 }
+
+
 
 .footer {
 	position: absolute;

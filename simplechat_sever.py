@@ -139,7 +139,7 @@ class MainHandler(tornado.web.RequestHandler):
             room = self.get_argument("room")
             nick = self.get_argument("nick")
             cid = self.__rh.add_roomnick(room, nick)
-            self.render("templates/chat.html", clientid=cid)
+            self.render("templates/chat.html", clientid=cid, this_room=room)
         except tornado.web.MissingArgumentError:
             for room in self.__rh.room_info:
                  avalaible_rooms += room

@@ -18,7 +18,7 @@
 		<div class="login">
 				<input id="txtRoom" type="text" name="Room" value="" placeholder="Enter a chatroom name"><br>
 				<input id="txtNickname" type="text" name="Nickname" value="" placeholder="Pick a username"><br>
-				<input id="btnLogin" type="button" name="Send" value="Start chat!" disabled="disabled"/>
+ 				<input id="btnLogin" type="button" name="Send" value="Start chat!" disabled="disabled"/>
 		</div>
 		<br>
 		<div id="alternative">
@@ -57,7 +57,12 @@
     <script>
         Zepto(function($){
             $('#btnLogin').click(function() { 
-                login(); 
+                if (validate()){
+					login();
+				} else{
+					alert("Usernames should be less than 15 characters \n Room names should not have spaces")
+				}
+				
             });
 
             $("#txtRoom").keyup(function(event) { update_send(event); } );
@@ -65,6 +70,30 @@
            
 
         });
+		
+		function validate(){
+			var nick;
+			var room;
+			var i;
+			var nick_ans;
+			var room_ans;
+			nick = $("#txtNickname").val()
+			room = $("#txtRoom").val()
+			
+			nick_ans = true;
+			if (nick.length > 15 ){
+				nick_ans = false;				
+			}
+			
+			room_ans = true;
+			for(i = 0; i < room.length; i++){
+				if (room[i] == " "){
+					room_ans = false;
+					break;
+				}
+			}	
+			return nick_ans && room_ans;
+		}
 
         function login(){
                 var h;

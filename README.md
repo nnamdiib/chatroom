@@ -6,12 +6,12 @@ I will extend his idea by adding the following features:
 
 - Attractive UI
 	- Homepage (done)
-	- Existing chatroom page 
-	- Chat page
+	- Existing chatroom page (done)
+	- Chat page (done)
 
 - limit usernames to 15 chars
 
-- no spaces allowed in room names
+- no spaces allowed in room and usernames.
 
 - Show available chatrooms
 
