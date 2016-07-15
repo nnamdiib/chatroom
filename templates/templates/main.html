@@ -57,11 +57,8 @@
     <script>
         Zepto(function($){
             $('#btnLogin').click(function() { 
-                if (validate()){
-					login();
-				} else{
-					alert("Usernames should be less than 15 characters \n Room names should not have spaces")
-				}
+              
+				login();
 				
             });
 
@@ -71,29 +68,7 @@
 
         });
 		
-		function validate(){
-			var nick;
-			var room;
-			var i;
-			var nick_ans;
-			var room_ans;
-			nick = $("#txtNickname").val()
-			room = $("#txtRoom").val()
-			
-			nick_ans = true;
-			if (nick.length > 15 ){
-				nick_ans = false;				
-			}
-			
-			room_ans = true;
-			for(i = 0; i < room.length; i++){
-				if (room[i] == " "){
-					room_ans = false;
-					break;
-				}
-			}	
-			return nick_ans && room_ans;
-		}
+
 
         function login(){
                 var h;
@@ -104,9 +79,9 @@
         function update_send(event) {
             if ( $("#txtRoom").val() != "" && $("#txtNickname").val() != "") {
                 $("#btnLogin").removeAttr("disabled");
-                if (event.which == 13){
-                    login();
-                }
+                if (event.which == 13){                   
+					login();
+				}
             } else {
                 $("#btnLogin").attr("disabled", "disabled");
             }

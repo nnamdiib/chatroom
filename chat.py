@@ -5,9 +5,12 @@ import uuid
 import json
 import tornado.ioloop
 import tornado.web
+import database
 from tornado import websocket
 from tornado.web import url
 
+db_filename = 'clamchat.db'
+database.create_db(db_filename)
 
 class RoomHandler(object):
     """Store data about connections, rooms, which users are in which rooms, etc."""
@@ -20,8 +23,12 @@ class RoomHandler(object):
         """Add nick to room. Return generated clientID"""
         # meant to be called from the main handler (page where somebody indicates a nickname and a room to join)
         cid = uuid.uuid4().hex  # generate a client id.
-        if room not in self.room_info:  # it's a new room # if room not in self.room_info:
-            self.room_info[room] = []
+       
+        # it's a new room if room not in self.room_info
+        if room not in self.room_info:
+           self.room_info[room] = []
+
+
         c = 1
         nn = nick
         nir = self.nicks_in_room(room)
@@ -37,6 +44,12 @@ class RoomHandler(object):
         self.client_info[cid] = {'room': room, 'nick': nn}  # we still don't know the WS connection for this client
         self.room_info[room].append({'cid': cid, 'nick': nn})
         return cid
+
+    def existing_room_names(self):
+        room_names = []
+        for room in self.room_info:
+            room_names.append(room)
+        return room_names
 
     def add_client_wsconn(self, client_id, conn):
         """Store the websocket connection corresponding to an existing client."""
@@ -83,10 +96,10 @@ class RoomHandler(object):
             del(self.room_info[cid_room])
             print "Removed empty room %s" % cid_room
 
-    def nicks_in_room(self, rn):
+    def nicks_in_room(self, room):
         """Return a list with the nicknames of the users currently connected to the specified room."""
         nir = []  # nicks in room
-        for user in self.room_info[rn]:
+        for user in self.room_info[room]:
             nir.append(user['nick'])
         return nir
 
@@ -114,8 +127,8 @@ class RoomHandler(object):
         """Send a message of type 'nick_list' (contains a list of nicknames) to all the specified connections."""
         msg = {"msgtype": "nick_list", "payload": nick_list}
         pmessage = json.dumps(msg)
-        for c in conns:
-            c.write_message(pmessage)
+        for conn in conns:
+            conn.write_message(pmessage)
 
     @staticmethod
     def send_leave_msg(nick, rconns):
@@ -164,13 +177,16 @@ class ClientWSConnection(websocket.WebSocketHandler):
         self.__rh.add_client_wsconn(client_id, self)
         print "WebSocket opened. ClientID = %s" % self.__clientID
 
-    def on_message(self, message):
+    def on_message(self, message):      
         msg = json.loads(message)
         msg['username'] = self.__rh.client_info[self.__clientID]['nick']
+        msg['room'] = self.__rh.client_info[self.__clientID]['room']
         pmessage = json.dumps(msg)
         rconns = self.__rh.roomate_cwsconns(self.__clientID)
         for conn in rconns:
             conn.write_message(pmessage)
+        database.insert(pmessage, db_filename)
+        
 
     def on_close(self):
         print "WebSocket closed"
