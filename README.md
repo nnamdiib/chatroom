@@ -5,6 +5,7 @@ I will extend his idea by adding the following features:
 - Message persistence
 	- Pickles?
 	- How to accurately sort each chat session by room name and time?
+	- Some combination of a small db + json data + time stamp?
 	
 
 - Attractive UI (done)
