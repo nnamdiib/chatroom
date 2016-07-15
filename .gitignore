@@ -1,4 +1,8 @@
 *.txt
 /hello.py
 /archives/
+*.pyc
+clamchat.db
+schema.sql
+a.py
 
