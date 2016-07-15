@@ -2,7 +2,7 @@
 /hello.py
 /archives/
 *.pyc
-clamchat.db
-schema.sql
+*.db
+*.sql
 a.py
 
