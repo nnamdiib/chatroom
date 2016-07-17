@@ -161,6 +161,7 @@ class MainHandler(tornado.web.RequestHandler):
             self.render("templates/main.html")
 
 class ExistingRooms(tornado.web.RequestHandler):
+    # To display existing chatrooms. 
 	def initialize(self, room_handler):
 		self.__rh = room_handler
 	
