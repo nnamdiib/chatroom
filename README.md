@@ -3,17 +3,15 @@ Chatroom service i am trying to build using Tornado and Bootstrap. A good portio
 I will extend his idea by adding the following features:
 
 - Message persistence
-	- Pickles?
-	- How to accurately sort each chat session by room name and time?
-	- Some combination of a small db + json data + time stamp?
+	- I am using a simple db with one table that stores all sent messages. 
+	- Retrieval can be through room name + time
+	- I can't think of a simpler way to get this done.
 	
 
 - Attractive UI (done)
 	- Homepage (done)
 	- Existing chatroom page (done)
 	- Chat page (done)
-
-- limit usernames to 15 chars (done)
 
 - no spaces allowed in room and usernames. (done)
 
