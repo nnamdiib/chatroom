@@ -196,12 +196,16 @@ class ClientWSConnection(websocket.WebSocketHandler):
         self.__rh.remove_client(self.__clientID)
 
 def main():
+    # Creating a Room Handler instance
     rh = RoomHandler()
+
+    # app settings
     settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
     "cookie_secret": "__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
     }
-    
+
+    # Creating the app instance
     app = tornado.web.Application([
         url(r"/", MainHandler, {'room_handler': rh}, name="index"),
 		url(r"/existing", ExistingRooms, {'room_handler': rh},  name="existing"),
@@ -212,10 +216,14 @@ def main():
         autoreload=True,
 		debug=True,
     )
+
+    # Starting the server
     app.listen(8888)
     print 'Simple Chat Server started.'
     print 'listening on 8888 ...'
     tornado.ioloop.IOLoop.instance().start()
+
+    
  
 if __name__ == "__main__":
 	main()
