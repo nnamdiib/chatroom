@@ -200,9 +200,8 @@ def main():
     settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
     "cookie_secret": "__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
-    "login_url": "/login",
-    "xsrf_cookies": True,
     }
+    
     app = tornado.web.Application([
         url(r"/", MainHandler, {'room_handler': rh}, name="index"),
 		url(r"/existing", ExistingRooms, {'room_handler': rh},  name="existing"),
