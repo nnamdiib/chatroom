@@ -202,6 +202,10 @@ def main():
     # app settings
     settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
+    "static_path": os.path.join(os.path.dirname(__file__), "static"),
+    "template_path": os.path.join(os.path.dirname(__file__), "templates"),
+    "autoreload": True,
+    "debug": True
     }
 
     # Creating the app instance
@@ -210,10 +214,7 @@ def main():
 		url(r"/existing", ExistingRooms, {'room_handler': rh},  name="existing"),
         url(r"/ws/(.*)", ClientWSConnection, {'room_handler': rh}),
 		],
-        static_path=os.path.join(os.path.dirname(__file__), "static"),
-        template_path=os.path.join(os.path.dirname(__file__), "templates"),
-        autoreload=True,
-		debug=True,
+        **settings
     )
 
     # Starting the server
