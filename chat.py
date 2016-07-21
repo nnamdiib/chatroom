@@ -219,7 +219,7 @@ def main():
 
     # Starting the server
     app.listen(8888)
-    print 'Simple Chat Server started.'
+    print 'Clam Chat Server started.'
     print 'listening on 8888 ...'
     tornado.ioloop.IOLoop.instance().start()
 
