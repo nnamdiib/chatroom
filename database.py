@@ -1,5 +1,4 @@
 import datetime
-import anydbm
 import sqlite3
 import os
 import json
