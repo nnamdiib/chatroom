@@ -1,7 +1,4 @@
 import datetime
-import cPickle as pickle
-from pprint import pprint
-import requests
 import anydbm
 import sqlite3
 import os
