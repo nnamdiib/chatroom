@@ -11,7 +11,7 @@ from tornado.web import url
 
 db_filename = 'clamchat.db'
 
-# Line below checks if a db exists. If it does not, its important to create it as soon as the server is started. 
+# Line creates a db to store all sent messages, unless one lready exists.
 database.create_db(db_filename)
 
 class RoomHandler(object):
